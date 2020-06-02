@@ -1,17 +1,23 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import Encode from './encode.js';
+import KeyInput from './keyInput.js';
+import Decode from './decode.js';
+
+class Decoder extends React.Component {
+    render() {
+        return(
+            <div>
+                <KeyInput></KeyInput>
+                <Encode></Encode>
+                <Decode></Decode>
+            </div>
+        );
+    }
+
+}
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
+    <Decoder/>,
+    document.getElementById('root')
 );
-
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
