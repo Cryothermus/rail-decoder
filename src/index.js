@@ -5,12 +5,33 @@ import KeyInput from './keyInput.js';
 import Decode from './decode.js';
 
 class Decoder extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            intKey: 0,
+            orderKey: [],
+            encodeContent: '',
+            decodeContent: '',
+        }
+
+        this.onDecodeChange = this.onDecodeChange.bind(this);
+        this.onEncodeChange = this.onEncodeChange.bind(this);
+    }
+
+    onEncodeChange(event) {
+        this.setState({encodeContent: event.target.value})
+    }
+
+    onDecodeChange(event) {
+        this.setState({decodeContent: event.target.value})
+    }
+
     render() {
         return(
             <div>
                 <KeyInput></KeyInput>
-                <Encode></Encode>
-                <Decode></Decode>
+                <Encode onChange={this.onEncodeChange}></Encode>
+                <Decode onChange={this.onDecodeChange}></Decode>
             </div>
         );
     }
