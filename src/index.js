@@ -12,6 +12,7 @@ class Decoder extends React.Component {
             orderKey: [],
             encodeContent: '',
             decodeContent: '',
+            isOrdered: false,
         }
 
         this.onDecodeChange = this.onDecodeChange.bind(this);
@@ -29,7 +30,7 @@ class Decoder extends React.Component {
     render() {
         return(
             <div>
-                <KeyInput></KeyInput>
+                <KeyInput onCheck={(status) => this.setState({isOrdered: status})}></KeyInput>
                 <Encode onChange={this.onEncodeChange}></Encode>
                 <Decode onChange={this.onDecodeChange}></Decode>
             </div>
