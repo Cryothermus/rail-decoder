@@ -21,6 +21,37 @@ class Decoder extends React.Component {
         this.onOrderedBlur = this.onOrderedBlur.bind(this);
     }
 
+    encodeCipher(text, railNum) { //TODO: this shit gives an error, figure it out later
+        var textRails = new Array(railNum);
+        for(var i = 0; i < textRails.length; i++) {
+            textRails[i] = "";
+        }
+
+        var railPos = 0;
+        var movingDown = false; //"moving down" increments the number
+        
+        for (i = 0; i < text.length; i++) {
+            //adds the character to the rail
+            textRails[railPos] = textRails[railPos].concat(text.charAt(i));
+            if (railPos === railNum - 1) {
+                movingDown = false;
+            }
+            else if (railPos === 0) {
+                movingDown = true;
+            }
+
+            if (movingDown) railPos++;
+            else railPos--;
+
+            
+        }
+        return textRails;
+    }
+
+    decodeCipher
+        
+    
+
     onEncodeChange(event) {
         this.setState({encodeContent: event.target.value});
     }
@@ -31,6 +62,7 @@ class Decoder extends React.Component {
 
     onKeyBlur(event) {
         console.log("Key input read.");
+        //console.log(this.encodeCipher("attackatdawn", 3))
         this.setState({intKey: parseInt(event.target.value)});
 
     }
@@ -38,11 +70,11 @@ class Decoder extends React.Component {
     onOrderedBlur(event) {
         console.log("Ordered input read.");
         var inputText = event.target.value;
-        var scannedInts = inputText.match(/\d+/g); //i only vaguely understand how this method works
+        var scannedInts = inputText.match(/\d+/g); //i only vaguely understand how match() works
         this.setState({orderKey: scannedInts.map(Number)});
-
-
     }
+
+
 
     render() {
         return(
