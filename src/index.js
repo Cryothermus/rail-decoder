@@ -21,7 +21,17 @@ class Decoder extends React.Component {
         this.onOrderedBlur = this.onOrderedBlur.bind(this);
     }
 
-    encodeCipher(text, railNum) { //TODO: this shit gives an error, figure it out later
+    isValidOrder(arrayKey) {
+        for (var i = 0; i < arrayKey.length; i++) {
+            if (arrayKey[i] > arrayKey.length) return false;
+            for (var j = 0; j < i; j++) {
+                if (arrayKey[j] === arrayKey[i]) return false;
+            }
+        }
+        return true;
+    }
+
+    encodeCipher(text, railNum) {
         var textRails = new Array(railNum);
         for(var i = 0; i < textRails.length; i++) {
             textRails[i] = "";
@@ -47,8 +57,6 @@ class Decoder extends React.Component {
         }
         return textRails;
     }
-
-    decodeCipher
         
     
 
