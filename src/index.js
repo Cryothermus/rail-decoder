@@ -4,6 +4,13 @@ import Encode from './encode.js';
 import KeyInput from './keyInput.js';
 import Decode from './decode.js';
 
+/*import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
+import IconButton from '@material-ui/core/IconButton';
+import MenuIcon from '@material-ui/icons/Menu';*/
+
 class Decoder extends React.Component {
     constructor(props) {
         super(props);
@@ -22,6 +29,7 @@ class Decoder extends React.Component {
     }
 
     isValidOrder(arrayKey) {
+        if (!Array.isArray(arrayKey)) return false;
         for (var i = 0; i < arrayKey.length; i++) {
             if (arrayKey[i] > arrayKey.length) return false;
             for (var j = 0; j < i; j++) {
@@ -31,15 +39,17 @@ class Decoder extends React.Component {
         return true;
     }
 
-    encodeCipher(text, railNum) {
+    encodeCipher(text, key) {
+        var isOrderedKey = this.isValidOrder(key);
+        var railNum = isOrderedKey ? key.length : key;
+
         var textRails = new Array(railNum);
-        for(var i = 0; i < textRails.length; i++) {
+        for (var i = 0; i < textRails.length; i++) {
             textRails[i] = "";
         }
-
         var railPos = 0;
         var movingDown = false; //"moving down" increments the number
-        
+
         for (i = 0; i < text.length; i++) {
             //adds the character to the rail
             textRails[railPos] = textRails[railPos].concat(text.charAt(i));
@@ -53,25 +63,28 @@ class Decoder extends React.Component {
             if (movingDown) railPos++;
             else railPos--;
 
-            
+
         }
-        return textRails;
+        if (!isOrderedKey) return textRails;
+        else return key.map(function(element) {return textRails[element]});
     }
-        
+
     
 
+
+
     onEncodeChange(event) {
-        this.setState({encodeContent: event.target.value});
+        this.setState({ encodeContent: event.target.value });
     }
 
     onDecodeChange(event) {
-        this.setState({decodeContent: event.target.value});
+        this.setState({ decodeContent: event.target.value });
     }
 
     onKeyBlur(event) {
         console.log("Key input read.");
-        //console.log(this.encodeCipher("attackatdawn", 3))
-        this.setState({intKey: parseInt(event.target.value)});
+        console.log(this.encodeCipher("attackatdawn", [0, 1, 2]))
+        this.setState({ intKey: parseInt(event.target.value) });
 
     }
 
@@ -79,19 +92,19 @@ class Decoder extends React.Component {
         console.log("Ordered input read.");
         var inputText = event.target.value;
         var scannedInts = inputText.match(/\d+/g); //i only vaguely understand how match() works
-        this.setState({orderKey: scannedInts.map(Number)});
+        this.setState({ orderKey: scannedInts.map(Number) });
     }
 
 
 
     render() {
-        return(
+        return (
             <div>
-                <KeyInput 
-                onCheck={() => this.setState({isOrdered: !(this.state.isOrdered)})}
-                ordered={this.state.isOrdered}
-                keyBlur={this.onKeyBlur}
-                orderedBlur={this.onOrderedBlur}></KeyInput>
+                <KeyInput
+                    onCheck={() => this.setState({ isOrdered: !(this.state.isOrdered) })}
+                    ordered={this.state.isOrdered}
+                    keyBlur={this.onKeyBlur}
+                    orderedBlur={this.onOrderedBlur}></KeyInput>
                 <Encode onChange={this.onEncodeChange}></Encode>
                 <Decode onChange={this.onDecodeChange}></Decode>
             </div>
@@ -101,6 +114,6 @@ class Decoder extends React.Component {
 }
 
 ReactDOM.render(
-    <Decoder/>,
+    <Decoder />,
     document.getElementById('root')
 );

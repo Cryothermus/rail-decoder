@@ -1,5 +1,6 @@
 import React from 'react';
 //import ReactDOM from 'react-dom';
+import { FaKey } from "react-icons/fa";
 
 class KeyInput extends React.Component {
 
@@ -7,7 +8,7 @@ class KeyInput extends React.Component {
         if (props.ordered) {
             return (
                 <div>
-                    <label>Ordered Key: </label>
+                    <label><FaKey /> Ordered Key: </label>
                     <input 
                     type="text" 
                     id="orderedKeyInput" 
@@ -18,7 +19,7 @@ class KeyInput extends React.Component {
         else {
             return (
                 <div>
-                    <label>Key: </label>
+                    <label><FaKey /> Key: </label>
                     <input 
                     type="text" 
                     id="basicKeyInput" 

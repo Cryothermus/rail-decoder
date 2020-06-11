@@ -1,4 +1,5 @@
 import React from 'react';
+import { Button } from '@material-ui/core';
 //import ReactDOM from 'react-dom';
 
 class Decode extends React.Component {
@@ -7,7 +8,7 @@ class Decode extends React.Component {
             <div>
                 <label>Decoded text:</label>
                 <textarea id="decodedText" onChange={this.props.onChange}></textarea>
-                <input type="button" value="Decode"></input>
+                <Button color="secondary" variant="contained">Decode</Button>
             </div>
         );
     }
