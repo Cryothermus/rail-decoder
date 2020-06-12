@@ -65,13 +65,45 @@ class Decoder extends React.Component {
 
 
         }
-        if (!isOrderedKey) return textRails;
-        else return key.map(function(element) {return textRails[element]});
+        if (!isOrderedKey) return textRails.join("");
+        else return key.map(function(element) {return textRails[element]}).join("");
     }
 
-    
+    decodeCipher(text, key) {
+        var isOrderedKey = this.isValidOrder(key);
+        var railLengths = isOrderedKey ? new Array(key.length) : new Array(key);
+        railLengths.fill(0);
+        //simulates the rail-creation process to determine the length of each rail
+        var railPos = 0;
+        var movingDown = false;
+        for(var i = 0; i < text.length; i++) {
+            railLengths[railPos]++;
+
+            if (railPos === railLengths - 1) {
+                movingDown = false;
+            }
+            else if (railPos === 0) {
+                movingDown = true;
+            }
+
+            if (movingDown) railPos++;
+            else railPos--;
+        }
+        // if the key is ordered, arrange the rail lengths into the correct order
+        if (isOrderedKey) {
+        railLengths = key.map(function(element) {return railLengths[element]});
+        }
+
+        //TODO: cut up the string based on railLengths, sort contents to decode
 
 
+
+
+
+
+
+
+    }
 
     onEncodeChange(event) {
         this.setState({ encodeContent: event.target.value });
@@ -83,7 +115,7 @@ class Decoder extends React.Component {
 
     onKeyBlur(event) {
         console.log("Key input read.");
-        console.log(this.encodeCipher("attackatdawn", [0, 1, 2]))
+        console.log(this.encodeCipher("attackatdawn", 3))
         this.setState({ intKey: parseInt(event.target.value) });
 
     }
