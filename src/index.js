@@ -72,14 +72,16 @@ class Decoder extends React.Component {
     decodeCipher(text, key) {
         var isOrderedKey = this.isValidOrder(key);
         var railLengths = isOrderedKey ? new Array(key.length) : new Array(key);
+        console.log(railLengths);
         railLengths.fill(0);
+        console.log(railLengths);
         //simulates the rail-creation process to determine the length of each rail
         var railPos = 0;
         var movingDown = false;
-        for(var i = 0; i < text.length; i++) {
+        for (var i = 0; i < text.length; i++) {
             railLengths[railPos]++;
 
-            if (railPos === railLengths - 1) {
+            if (railPos === railLengths.length - 1) {
                 movingDown = false;
             }
             else if (railPos === 0) {
@@ -88,20 +90,47 @@ class Decoder extends React.Component {
 
             if (movingDown) railPos++;
             else railPos--;
+            //console.log(railLengths);
         }
+
         // if the key is ordered, arrange the rail lengths into the correct order
         if (isOrderedKey) {
         railLengths = key.map(function(element) {return railLengths[element]});
         }
 
-        //TODO: cut up the string based on railLengths, sort contents to decode
 
+        var textRails = railLengths.map(function(element) {
+            var cutText = text.slice(0, element);
+            text = text.slice(element, text.length);
+            return cutText;
+        })
+        console.log(textRails);
 
+        if (isOrderedKey) { //gets the rails back in proper order
+            textRails = key.map(function(element) {return textRails[element]});
+        }
 
+        var finalString = "";
+        railPos = 0;
+        movingDown = false;
+        while(textRails[railPos] !== "") {
+            //slices off the first chracter of the chosen text rail, adding it to the list
+            finalString = finalString.concat(textRails[railPos].charAt(0));
+            textRails[railPos] = textRails[railPos].slice(1, textRails[railPos].length);
 
+            if (railPos === textRails.length - 1) {
+                movingDown = false;
+            }
+            else if (railPos === 0) {
+                movingDown = true;
+            }
 
+            if (movingDown) railPos++;
+            else railPos--;
 
+        }
 
+        return finalString;
 
     }
 
@@ -116,6 +145,7 @@ class Decoder extends React.Component {
     onKeyBlur(event) {
         console.log("Key input read.");
         console.log(this.encodeCipher("attackatdawn", 3))
+        console.log(this.decodeCipher("acdtaktantaw", 3))
         this.setState({ intKey: parseInt(event.target.value) });
 
     }
