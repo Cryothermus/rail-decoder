@@ -6,7 +6,7 @@ class Encode extends React.Component {
     render() {
         return (
             <div>
-                <label>Encoded text:</label>
+                <label>Decoded text:</label>
                 {/* <TextField
                     id="filled-multiline-static"
                     label="Encoded Text"
@@ -17,8 +17,15 @@ class Encode extends React.Component {
                 />
                 <br />
                 <br /> */}
-                <textarea id="encodedText" onChange={this.props.onChange}></textarea>
-                <Button color="primary" variant="contained">Encode</Button>
+                <textarea 
+                id="encodedText" 
+                onChange={this.props.onChange}
+                value={this.props.textContent}
+                ></textarea>
+                <Button 
+                color="primary" 
+                variant="contained"
+                onClick={this.props.onClick}>Encode</Button>
             </div>
         );
     }

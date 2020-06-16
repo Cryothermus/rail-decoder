@@ -6,9 +6,16 @@ class Decode extends React.Component {
     render() {
         return(
             <div>
-                <label>Decoded text:</label>
-                <textarea id="decodedText" onChange={this.props.onChange}></textarea>
-                <Button color="secondary" variant="contained">Decode</Button>
+                <label>Encoded text:</label>
+                <textarea 
+                id="decodedText" 
+                onChange={this.props.onChange}
+                value={this.props.textContent}
+                ></textarea>
+                <Button 
+                color="secondary" 
+                variant="contained"
+                onClick={this.props.onClick}>Decode</Button>
             </div>
         );
     }

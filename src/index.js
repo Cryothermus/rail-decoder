@@ -26,6 +26,8 @@ class Decoder extends React.Component {
         this.onEncodeChange = this.onEncodeChange.bind(this);
         this.onKeyBlur = this.onKeyBlur.bind(this);
         this.onOrderedBlur = this.onOrderedBlur.bind(this);
+        this.encodeInput = this.encodeInput.bind(this);
+        this.decodeInput = this.decodeInput.bind(this);
     }
 
     isValidOrder(arrayKey) {
@@ -70,11 +72,13 @@ class Decoder extends React.Component {
     }
 
     decodeCipher(text, key) {
+        //some basic setup (key type, creates rail length array)
         var isOrderedKey = this.isValidOrder(key);
         var railLengths = isOrderedKey ? new Array(key.length) : new Array(key);
-        console.log(railLengths);
+        //console.log(railLengths);
         railLengths.fill(0);
-        console.log(railLengths);
+        //console.log(railLengths);
+
         //simulates the rail-creation process to determine the length of each rail
         var railPos = 0;
         var movingDown = false;
@@ -98,7 +102,7 @@ class Decoder extends React.Component {
         railLengths = key.map(function(element) {return railLengths[element]});
         }
 
-
+        //cuts the ciphertext into appropriate rails
         var textRails = railLengths.map(function(element) {
             var cutText = text.slice(0, element);
             text = text.slice(element, text.length);
@@ -110,6 +114,7 @@ class Decoder extends React.Component {
             textRails = key.map(function(element) {return textRails[element]});
         }
 
+        //creates the decoded string from the rail contents
         var finalString = "";
         railPos = 0;
         movingDown = false;
@@ -131,8 +136,25 @@ class Decoder extends React.Component {
         }
 
         return finalString;
+    }
+
+    encodeInput(event) { //handles clicking of "encode"
+        console.log("Encoding text");
+        var key = this.state.isOrdered? this.state.orderKey : this.state.intKey;
+        var encodedText = this.encodeCipher(this.state.encodeContent, key);
+        console.log(encodedText);
+        this.setState({decodeContent: encodedText});
 
     }
+
+    decodeInput(event) { //handles clicking of "decode"
+        console.log("Decoding text");
+        var key = this.state.isOrdered ? this.state.orderKey : this.state.intKey;
+        var decodedText = this.decodeCipher(this.state.decodeContent, key);
+        this.setState({encodeContent: decodedText});
+    }
+
+
 
     onEncodeChange(event) {
         this.setState({ encodeContent: event.target.value });
@@ -144,8 +166,6 @@ class Decoder extends React.Component {
 
     onKeyBlur(event) {
         console.log("Key input read.");
-        console.log(this.encodeCipher("attackatdawn", 3))
-        console.log(this.decodeCipher("acdtaktantaw", 3))
         this.setState({ intKey: parseInt(event.target.value) });
 
     }
@@ -167,8 +187,16 @@ class Decoder extends React.Component {
                     ordered={this.state.isOrdered}
                     keyBlur={this.onKeyBlur}
                     orderedBlur={this.onOrderedBlur}></KeyInput>
-                <Encode onChange={this.onEncodeChange}></Encode>
-                <Decode onChange={this.onDecodeChange}></Decode>
+                <Encode 
+                    onChange={this.onEncodeChange}
+                    onClick={this.encodeInput}
+                    textContent={this.state.encodeContent}
+                ></Encode>
+                <Decode 
+                    onChange={this.onDecodeChange}
+                    onClick={this.decodeInput}
+                    textContent={this.state.decodeContent}
+                ></Decode>
             </div>
         );
     }
