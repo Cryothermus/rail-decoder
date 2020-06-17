@@ -187,16 +187,17 @@ class Decoder extends React.Component {
                     ordered={this.state.isOrdered}
                     keyBlur={this.onKeyBlur}
                     orderedBlur={this.onOrderedBlur}></KeyInput>
-                <Encode 
-                    onChange={this.onEncodeChange}
-                    onClick={this.encodeInput}
-                    textContent={this.state.encodeContent}
-                ></Encode>
+               
                 <Decode 
                     onChange={this.onDecodeChange}
                     onClick={this.decodeInput}
                     textContent={this.state.decodeContent}
                 ></Decode>
+                <Encode 
+                    onChange={this.onEncodeChange}
+                    onClick={this.encodeInput}
+                    textContent={this.state.encodeContent}
+                ></Encode>
             </div>
         );
     }
