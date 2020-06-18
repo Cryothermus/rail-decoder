@@ -1,6 +1,7 @@
 import React from 'react';
 //import ReactDOM from 'react-dom';
 import { FaKey } from "react-icons/fa";
+import { Checkbox, FormControlLabel, TextField } from '@material-ui/core';
 
 class KeyInput extends React.Component {
 
@@ -8,23 +9,48 @@ class KeyInput extends React.Component {
         if (props.ordered) {
             return (
                 <div>
-                    <label><FaKey /> Ordered Key: </label>
-                    <input 
-                    type="text" 
-                    id="orderedKeyInput" 
-                    onBlur={props.orderedBlur}></input>
+                    <FormControlLabel
+                        control={
+                            <TextField
+                                variant="standard"
+                                id="orderedKeyInput"
+                                onBlur={props.keyBlur}
+                                size="small"
+                            />
+                        }
+                        label="Ordered Key:"
+                        labelPlacement="start"
+                    />
+                    {/*<label><FaKey /> Ordered Key: </label>
+                    <input
+                        type="text"
+                        id="orderedKeyInput"
+                    onBlur={props.orderedBlur}></input>*/}
                 </div>
             );
         }
         else {
             return (
                 <div>
-                    <label><FaKey /> Key: </label>
-                    <input 
-                    type="text" 
-                    id="basicKeyInput" 
-                    onBlur={props.keyBlur}
-                    ></input>
+                    <FormControlLabel
+                        control={
+                            <TextField
+                                variant="standard"
+                                id="basicKeyInput"
+                                onBlur={props.keyBlur}
+                                size="small"
+                            />
+                        }
+                        label="Key:"
+                        labelPlacement="start"
+                    />
+
+                    {/*<label><FaKey /> Key: </label>
+                    <input
+                        type="text"
+                        id="basicKeyInput"
+                        onBlur={props.keyBlur}
+                    ></input>*/}
                 </div>
             )
         }
@@ -32,14 +58,26 @@ class KeyInput extends React.Component {
 
 
     render() {
-        return(
+        return (
             <div>
-                <label>Use Ordered Key: </label>
-                <input type='checkbox' onClick={() => {this.props.onCheck()}}></input>
-                <this.KeyBox 
-                ordered={this.props.ordered}
-                keyBlur={this.props.keyBlur}
-                orderedBlur={this.props.orderedBlur}></this.KeyBox>
+                <FormControlLabel
+                    control={
+                        <Checkbox
+                            id="order=toggle=checkbox"
+                            color="primary"
+                            onClick={this.props.onCheck}
+                        />
+                    }
+                    label="Use Ordered Key:"
+                    labelPlacement="start"
+                />
+
+                {/*<label>Use Ordered Key: </label>
+                <input type='checkbox' onClick={() => {this.props.onCheck()}}></input>*/}
+                <this.KeyBox
+                    ordered={this.props.ordered}
+                    keyBlur={this.props.keyBlur}
+                    orderedBlur={this.props.orderedBlur}></this.KeyBox>
             </div>
         );
     }
