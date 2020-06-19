@@ -20,6 +20,7 @@ class Decoder extends React.Component {
             encodeContent: '',
             decodeContent: '',
             isOrdered: false,
+            keyErrorLabel: "",
         }
 
         this.onDecodeChange = this.onDecodeChange.bind(this);
@@ -41,9 +42,18 @@ class Decoder extends React.Component {
         return true;
     }
 
+    doKeyError(message, seconds) {
+        this.setState({keyErrorLabel: message});
+        setTimeout(() => {this.setState({keyErrorLabel: ""})}, seconds * 1000);
+    }
+
     encodeCipher(text, key) {
         var isOrderedKey = this.isValidOrder(key);
         var railNum = isOrderedKey ? key.length : key;
+        if (railNum === 0 || railNum === null) {
+            this.doKeyError("Invalid key", 3);
+            return;
+        }
 
         var textRails = new Array(railNum);
         for (var i = 0; i < textRails.length; i++) {
@@ -74,7 +84,12 @@ class Decoder extends React.Component {
     decodeCipher(text, key) {
         //some basic setup (key type, creates rail length array)
         var isOrderedKey = this.isValidOrder(key);
-        var railLengths = isOrderedKey ? new Array(key.length) : new Array(key);
+        var keyLength = isOrderedKey ? key.length : key;
+        if (keyLength === 0 || keyLength === null) {
+            this.doKeyError("Invalid key", 3);
+            return;
+        }
+        var railLengths = new Array(keyLength);
         //console.log(railLengths);
         railLengths.fill(0);
         //console.log(railLengths);
@@ -173,6 +188,7 @@ class Decoder extends React.Component {
     onOrderedBlur(event) {
         console.log("Ordered input read.");
         var inputText = event.target.value;
+        console.log(inputText);
         var scannedInts = inputText.match(/\d+/g); //i only vaguely understand how match() works
         this.setState({ orderKey: scannedInts.map(Number) });
     }
@@ -186,7 +202,10 @@ class Decoder extends React.Component {
                     onCheck={() => this.setState({ isOrdered: !(this.state.isOrdered) })}
                     ordered={this.state.isOrdered}
                     keyBlur={this.onKeyBlur}
-                    orderedBlur={this.onOrderedBlur}></KeyInput>
+                    orderedBlur={this.onOrderedBlur}
+                    errorMessage={this.state.keyErrorLabel}>
+                    </KeyInput>
+                    <div/>
                
                 <Decode 
                     onChange={this.onDecodeChange}

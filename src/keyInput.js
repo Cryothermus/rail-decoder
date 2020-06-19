@@ -13,8 +13,10 @@ class KeyInput extends React.Component {
                         control={
                             <TextField
                                 variant="standard"
+                                error={props.errorMessage.length !== 0}
+                                helperText={props.errorMessage}
                                 id="orderedKeyInput"
-                                onBlur={props.keyBlur}
+                                onBlur={props.orderedBlur}
                                 size="small"
                             />
                         }
@@ -36,6 +38,8 @@ class KeyInput extends React.Component {
                         control={
                             <TextField
                                 variant="standard"
+                                error={props.errorMessage.length !== 0}
+                                helperText={props.errorMessage}
                                 id="basicKeyInput"
                                 onBlur={props.keyBlur}
                                 size="small"
@@ -77,7 +81,8 @@ class KeyInput extends React.Component {
                 <this.KeyBox
                     ordered={this.props.ordered}
                     keyBlur={this.props.keyBlur}
-                    orderedBlur={this.props.orderedBlur}></this.KeyBox>
+                    orderedBlur={this.props.orderedBlur}
+                    errorMessage={this.props.errorMessage}></this.KeyBox>
             </div>
         );
     }

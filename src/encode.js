@@ -8,11 +8,11 @@ class Encode extends React.Component {
             <div>
                 {/*<label>Decoded text:</label>*/}
                 <TextField
-                    id="filled-multiline-static"
+                    id="decodedText"
                     label="Decoded Text:"
                     multiline
                     rows={4}
-                    variant="filled"
+                    variant="outlined"
                     onChange={this.props.onChange}
                     value={this.props.textContent}
                 />
@@ -23,7 +23,8 @@ class Encode extends React.Component {
                 value={this.props.textContent}
                 ></textarea>*/}
                 <Button 
-                color="primary" 
+                color="secondary"
+                id="encodeButton" 
                 variant="contained"
                 onClick={this.props.onClick}>Encode</Button>
             </div>

@@ -7,11 +7,11 @@ class Decode extends React.Component {
         return(
             <div>
                 <TextField
-                    id="filled-multiline-static"
+                    id="encodedText"
                     label="Encoded Text:"
                     multiline
                     rows={4}
-                    variant="filled"
+                    variant="outlined"
                     onChange={this.props.onChange}
                     value={this.props.textContent}
                 />
@@ -22,7 +22,8 @@ class Decode extends React.Component {
                 value={this.props.textContent}
                 ></textarea> */}
                 <Button 
-                color="secondary" 
+                color="primary"
+                id="decodeButton" 
                 variant="contained"
                 onClick={this.props.onClick}>Decode</Button>
             </div>
