@@ -1,31 +1,39 @@
 import React from 'react';
-import { Button, TextField } from '@material-ui/core';
+import { Button, TextField, Grid } from '@material-ui/core';
 //import ReactDOM from 'react-dom';
 
 class Decode extends React.Component {
     render() {
-        return(
+        return (
             <div>
-                <TextField
-                    id="encodedText"
-                    label="Encoded Text:"
-                    multiline
-                    rows={4}
-                    variant="outlined"
-                    onChange={this.props.onChange}
-                    value={this.props.textContent}
-                />
-                {/*<label>Encoded text:</label>
-                <textarea 
-                id="decodedText" 
-                onChange={this.props.onChange}
-                value={this.props.textContent}
-                ></textarea> */}
-                <Button 
-                color="primary"
-                id="decodeButton" 
-                variant="contained"
-                onClick={this.props.onClick}>Decode</Button>
+                <Grid
+                    container
+                    direction="column"
+                    spacing={13}
+                    justify="flex-start"
+                    alignItems="flex-start" >
+
+                    <TextField
+                        id="encodedText"
+                        label="Encoded Text:"
+                        multiline
+                        rows={6}
+                        variant="outlined"
+                        onChange={this.props.onChange}
+                        value={this.props.textContent}
+                    />
+
+                    <br/>
+
+
+                    <Button
+                        color="primary"
+                        id="decodeButton"
+                        variant="contained"
+                        onClick={this.props.onClick}>Decode
+                    </Button>
+
+                </Grid>
             </div>
         );
     }
