@@ -1,7 +1,7 @@
 import React from 'react';
 //import ReactDOM from 'react-dom';
-import { FaKey } from "react-icons/fa";
-import { Checkbox, FormControlLabel, TextField, Grid } from '@material-ui/core';
+//import { FaKey } from "react-icons/fa";
+import { Checkbox, FormControlLabel, TextField, /*Grid*/ } from '@material-ui/core';
 
 class KeyInput extends React.Component {
 
@@ -20,7 +20,7 @@ class KeyInput extends React.Component {
                                 size="small"
                             />
                         }
-                        label="Ordered Key:"
+                        label="Ordered Key:  "
                         labelPlacement="start"
                     />
                     {/*<label><FaKey /> Ordered Key: </label>
@@ -45,7 +45,7 @@ class KeyInput extends React.Component {
                                 size="small"
                             />
                         }
-                        label="Key:"
+                        label="Key: "
                         labelPlacement="start"
                     />
 

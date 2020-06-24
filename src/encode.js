@@ -8,6 +8,7 @@ class Encode extends React.Component {
             <div>
                 <Grid
                     container
+                    class="encodeGrid"
                     direction="column"
                     justify="flex-start"
                     alignItems="flex-start" >

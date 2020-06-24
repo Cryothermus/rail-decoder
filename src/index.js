@@ -48,13 +48,22 @@ class Decoder extends React.Component {
         setTimeout(() => { this.setState({ keyErrorLabel: "" }) }, seconds * 1000);
     }
 
+    checkKeyInput(length, key) {
+        if (length === 0 || !length) {
+            this.doKeyError("Invalid key", 3)
+            return false;
+        }
+        else if (this.state.isOrdered !== this.isValidOrder(key)) {
+            this.doKeyError("Invalid key order", 3)
+            return false;
+        }
+        return true;
+    }
+
     encodeCipher(text, key) {
         var isOrderedKey = this.isValidOrder(key);
         var railNum = isOrderedKey ? key.length : key;
-        if (railNum === 0 || railNum === null) {
-            this.doKeyError("Invalid key", 3);
-            return;
-        }
+        if (!this.checkKeyInput(railNum, key)) return;
 
         var textRails = new Array(railNum);
         for (var i = 0; i < textRails.length; i++) {
@@ -86,12 +95,10 @@ class Decoder extends React.Component {
         //some basic setup (key type, creates rail length array)
         var isOrderedKey = this.isValidOrder(key);
         var keyLength = isOrderedKey ? key.length : key;
-        if (keyLength === 0 || keyLength === null) {
-            this.doKeyError("Invalid key", 3);
-            return;
-        }
-        var railLengths = new Array(keyLength);
+        if (!this.checkKeyInput(keyLength, key)) return;
+
         //console.log(railLengths);
+        var railLengths = new Array(keyLength);
         railLengths.fill(0);
         //console.log(railLengths);
 
@@ -191,7 +198,7 @@ class Decoder extends React.Component {
         var inputText = event.target.value;
         console.log(inputText);
         var scannedInts = inputText.match(/\d+/g); //i only vaguely understand how match() works
-        this.setState({ orderKey: scannedInts.map(Number) });
+        if (scannedInts) this.setState({ orderKey: scannedInts.map(Number) });
     }
 
 

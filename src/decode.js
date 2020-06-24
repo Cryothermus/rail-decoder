@@ -8,6 +8,7 @@ class Decode extends React.Component {
             <div>
                 <Grid
                     container
+                    class="decodeGrid"
                     direction="column"
                     spacing={13}
                     justify="flex-start"
@@ -22,9 +23,6 @@ class Decode extends React.Component {
                         onChange={this.props.onChange}
                         value={this.props.textContent}
                     />
-
-                    <br/>
-
 
                     <Button
                         color="primary"
