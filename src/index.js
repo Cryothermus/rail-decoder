@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import Encode from './encode.js';
 import KeyInput from './keyInput.js';
 import Decode from './decode.js';
+import './index.css';
 
 /*import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -87,6 +88,7 @@ class Decoder extends React.Component {
 
 
         }
+        console.log(textRails);
         if (!isOrderedKey) return textRails.join("");
         else return key.map(function (element) { return textRails[element] }).join("");
     }
@@ -119,11 +121,13 @@ class Decoder extends React.Component {
             else railPos--;
             //console.log(railLengths);
         }
+        console.log(railLengths);
 
         // if the key is ordered, arrange the rail lengths into the correct order
         if (isOrderedKey) {
             railLengths = key.map(function (element) { return railLengths[element] });
         }
+        console.log(railLengths);
 
         //cuts the ciphertext into appropriate rails
         var textRails = railLengths.map(function (element) {
@@ -133,9 +137,14 @@ class Decoder extends React.Component {
         })
         console.log(textRails);
 
-        if (isOrderedKey) { //gets the rails back in proper order
-            textRails = key.map(function (element) { return textRails[element] });
+       if (isOrderedKey) { //gets the rails back in proper order ** TODO: DOESN'T WORK, FIX THIS**
+            var holdRails = [];
+            for (i = 0; i < textRails.length; i++) {
+                holdRails.push(textRails[key.indexOf(i)]);
+            }
+            textRails = holdRails;
         }
+        console.log(textRails);
 
         //creates the decoded string from the rail contents
         var finalString = "";
@@ -211,24 +220,26 @@ class Decoder extends React.Component {
                     ordered={this.state.isOrdered}
                     keyBlur={this.onKeyBlur}
                     orderedBlur={this.onOrderedBlur}
-                    errorMessage={this.state.keyErrorLabel}>
-                </KeyInput>
-                <div />
+                    errorMessage={this.state.keyErrorLabel}
+                    id="keyInput"
+                    ></KeyInput>
+                <br/>
                 <Grid
                 container
                 direction="row"
+                id="cipherRow"
                 justify="flex-start"
                 alignItems="center">
-                    <Decode
-                        onChange={this.onDecodeChange}
-                        onClick={this.decodeInput}
-                        textContent={this.state.decodeContent}
-                    ></Decode>
                     <Encode
                         onChange={this.onEncodeChange}
                         onClick={this.encodeInput}
                         textContent={this.state.encodeContent}
                     ></Encode>
+                    <Decode
+                        onChange={this.onDecodeChange}
+                        onClick={this.decodeInput}
+                        textContent={this.state.decodeContent}
+                    ></Decode>
                 </Grid>
             </div>
         );

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Button, TextField, Grid } from '@material-ui/core';
+
 //import ReactDOM from 'react-dom';
 
 class Encode extends React.Component {
@@ -8,13 +9,15 @@ class Encode extends React.Component {
             <div>
                 <Grid
                     container
-                    class="encodeGrid"
+                    id="encodeGrid"
+                    className="cipherGrid"
                     direction="column"
                     justify="flex-start"
                     alignItems="flex-start" >
 
                     <TextField
                         id="decodedText"
+                        className="inputField"
                         label="Decoded Text:"
                         multiline
                         rows={6}
@@ -22,10 +25,11 @@ class Encode extends React.Component {
                         onChange={this.props.onChange}
                         value={this.props.textContent}
                     />
-                    <br/>
+                    
                     <Button
                         color="secondary"
                         id="encodeButton"
+                        className="cipherButton"
                         variant="contained"
                         onClick={this.props.onClick}>Encode</Button>
                 </Grid>
