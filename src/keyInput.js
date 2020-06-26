@@ -1,7 +1,8 @@
 import React from 'react';
 //import ReactDOM from 'react-dom';
 //import { FaKey } from "react-icons/fa";
-import { Checkbox, FormControlLabel, TextField, /*Grid*/ } from '@material-ui/core';
+import { Checkbox, FormControlLabel, TextField, IconButton, Tooltip, /*Grid*/ } from '@material-ui/core';
+import HelpIcon from '@material-ui/icons/Help';
 import './index.css';
 
 class KeyInput extends React.Component {
@@ -76,9 +77,21 @@ class KeyInput extends React.Component {
                     label="Use Ordered Key:"
                     labelPlacement="start"
                 />
+                <Tooltip 
+                title="An ordered key is an arrangement of unique integers within a range, starting at zero. Ex: {3, 0, 1, 4, 2}"
+                placement="right"
+                arrow>
+                    <IconButton
+                        aria-label="help"
+                        disableFocusRipple={true}
+                        disableRipple={true}
+                        size="medium"
+                        >
+                        <HelpIcon
+                            fontSize="small" />
+                    </IconButton>
+                </Tooltip>
 
-                {/*<label>Use Ordered Key: </label>
-                <input type='checkbox' onClick={() => {this.props.onCheck()}}></input>*/}
                 <this.KeyBox
                     ordered={this.props.ordered}
                     keyBlur={this.props.keyBlur}
