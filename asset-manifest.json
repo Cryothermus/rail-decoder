@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/rail-decoder/static/css/main.1cc2962b.chunk.css",
+    "main.js": "/rail-decoder/static/js/main.d197248b.chunk.js",
+    "main.js.map": "/rail-decoder/static/js/main.d197248b.chunk.js.map",
+    "runtime-main.js": "/rail-decoder/static/js/runtime-main.379b3aba.js",
+    "runtime-main.js.map": "/rail-decoder/static/js/runtime-main.379b3aba.js.map",
+    "static/js/2.76d8d074.chunk.js": "/rail-decoder/static/js/2.76d8d074.chunk.js",
+    "static/js/2.76d8d074.chunk.js.map": "/rail-decoder/static/js/2.76d8d074.chunk.js.map",
+    "index.html": "/rail-decoder/index.html",
+    "precache-manifest.c8aba5b4704d29ec9ffabe182204d92c.js": "/rail-decoder/precache-manifest.c8aba5b4704d29ec9ffabe182204d92c.js",
+    "service-worker.js": "/rail-decoder/service-worker.js",
+    "static/css/main.1cc2962b.chunk.css.map": "/rail-decoder/static/css/main.1cc2962b.chunk.css.map",
+    "static/js/2.76d8d074.chunk.js.LICENSE.txt": "/rail-decoder/static/js/2.76d8d074.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.379b3aba.js",
+    "static/js/2.76d8d074.chunk.js",
+    "static/css/main.1cc2962b.chunk.css",
+    "static/js/main.d197248b.chunk.js"
+  ]
+}
