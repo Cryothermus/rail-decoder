@@ -19,6 +19,9 @@ class Decoder extends React.Component {
             decodeContent: '',
             isOrdered: false,
             keyErrorLabel: "",
+            excludeSpaces: false,
+            excludeSymbols: false,
+            doCaps: false,
         }
 
         this.onDecodeChange = this.onDecodeChange.bind(this);
@@ -27,6 +30,7 @@ class Decoder extends React.Component {
         this.onOrderedBlur = this.onOrderedBlur.bind(this);
         this.encodeInput = this.encodeInput.bind(this);
         this.decodeInput = this.decodeInput.bind(this);
+        this.applyOptions = this.applyOptions.bind(this);
     }
 
     isValidOrder(arrayKey) {
@@ -43,6 +47,22 @@ class Decoder extends React.Component {
     doKeyError(message, seconds) {
         this.setState({ keyErrorLabel: message });
         setTimeout(() => { this.setState({ keyErrorLabel: "" }) }, seconds * 1000);
+    }
+
+    applyOptions(text) {
+        if (this.state.excludeSpaces) {
+            text = text.replace(/\s/, '');
+        }
+
+        if (this.state.excludeSymbols) {
+            text = text.replace(/[$-/:-?{-~!"^_`[\]]/,'')
+        }
+
+        if (this.state.doCaps) {
+            text = text.toUpperCase();
+        }
+
+        return text;
     }
 
     checkKeyInput(length, key) {
@@ -85,8 +105,11 @@ class Decoder extends React.Component {
 
         }
         console.log(textRails);
-        if (!isOrderedKey) return textRails.join("");
-        else return key.map(function (element) { return textRails[element] }).join("");
+        var result;
+        if (!isOrderedKey) result = textRails.join("");
+        else result = key.map(function (element) { return textRails[element] }).join("");
+
+        return this.applyOptions(result);
     }
 
     decodeCipher(text, key) {
@@ -163,7 +186,7 @@ class Decoder extends React.Component {
 
         }
 
-        return finalString;
+        return this.applyOptions(finalString);
     }
 
     encodeInput(event) { //handles clicking of "encode"
@@ -237,7 +260,12 @@ class Decoder extends React.Component {
                         textContent={this.state.decodeContent}
                     ></Decode>
                 </Grid>
-                <Options/>
+                <br/>
+                <Options
+                onClickSpaces={() => this.setState({excludeSpaces: !(this.state.excludeSpaces)})}
+                onClickSymbols={() => this.setState({excludeSymbols: !(this.state.excludeSymbols)})}
+                onClickCaps={() => this.setState({doCaps: !(this.state.doCaps)})}
+                />
             </div>
         );
     }
