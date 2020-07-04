@@ -50,15 +50,15 @@ class Decoder extends React.Component {
     }
 
     applyOptions(text) {
-        if (this.state.excludeSpaces) {
-            text = text.replace(/\s/, '');
+        if (text && this.state.excludeSpaces) {
+            text = text.replace(/\s/g, '');
         }
 
-        if (this.state.excludeSymbols) {
-            text = text.replace(/[$-/:-?{-~!"^_`[\]]/,'')
+        if (text && this.state.excludeSymbols) {
+            text = text.replace(/[$-/:-?{-~!"^_`[\]]/g,'')
         }
 
-        if (this.state.doCaps) {
+        if (text && this.state.doCaps) {
             text = text.toUpperCase();
         }
 
@@ -109,7 +109,7 @@ class Decoder extends React.Component {
         if (!isOrderedKey) result = textRails.join("");
         else result = key.map(function (element) { return textRails[element] }).join("");
 
-        return this.applyOptions(result);
+        return result;
     }
 
     decodeCipher(text, key) {
@@ -186,7 +186,7 @@ class Decoder extends React.Component {
 
         }
 
-        return this.applyOptions(finalString);
+        return finalString;
     }
 
     encodeInput(event) { //handles clicking of "encode"
@@ -194,7 +194,8 @@ class Decoder extends React.Component {
         var key = this.state.isOrdered ? this.state.orderKey : this.state.intKey;
         var encodedText = this.encodeCipher(this.state.encodeContent, key);
         console.log(encodedText);
-        this.setState({ decodeContent: encodedText });
+        this.setState({ decodeContent: this.applyOptions(encodedText) })
+        this.setState({ encodeContent: this.applyOptions(this.state.encodeContent)});
 
     }
 
@@ -202,7 +203,8 @@ class Decoder extends React.Component {
         console.log("Decoding text");
         var key = this.state.isOrdered ? this.state.orderKey : this.state.intKey;
         var decodedText = this.decodeCipher(this.state.decodeContent, key);
-        this.setState({ encodeContent: decodedText });
+        this.setState({ encodeContent: this.applyOptions(decodedText) });
+        this.setState({ decodeContent: this.applyOptions(this.state.decodeContent)});
     }
 
 

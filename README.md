@@ -1,68 +1,37 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is a decoder for a rail-fence cipher that I've been working on at my own pace over the course of June 2020. It has most of the same features as other decoders available online, but it's also able to use an "ordered key" that shifts the positions of each rail in the cipher, for advanced encryption.
 
-## Available Scripts
+You can access it at http://Cryothermus.github.io/rail-decoder. 
 
-In the project directory, you can run:
+## Features
 
-### `npm start`
+- Encryption and decryption of ciphertext and plaintext.
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- Support for both standard rail-fence cipher keys (consisting of a single integer) and "ordered keys", consisting of a re-arranged sequence of ordered integers (starting at 0).
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+- Options to ignore symbols, casing, and spaces during operations.
 
-### `npm test`
+- Error messages and input protection on key inputs, to avoid non-functional keys.
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## FAQ
 
-### `npm run build`
+- **What is a "rail-fence cipher"?**
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+It's a bit convoluted to explain here, so here's a [Wikipedia article](https://en.wikipedia.org/wiki/Rail_fence_cipher).
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+Basically, it re-arranged the characters so they zig-zag across a set of rails, and then reads the rails in order. The "ordered key" functionality here alos re-arranges these rails for more effective obfuscation.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- **Why did you make this? It's a bit niche...**
 
-### `npm run eject`
+Basically, back in Spring 2020, I had to do an (admittedly very fun) CTF challenge for my Information Assurance class. One of the challenges involved required us to decode a rail-fence cipher, with an ordered key, and there wasn't any software online that allowed us to do that already- they all exclusively supported standard keys. So, 4-5 months after the fact, I decided to make this.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+I mostly just made it to learn React and keep myself sharp over the summer, though.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Credits
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+Made using [ReactJS 16.13.1](https://reactjs.org/) and [MaterialUI 4.10.1](https://material-ui.com/).
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+Special thanks to:
 
-## Learn More
+- [Ananay Arora](https://ananayarora.com/), for showing me MaterialUI, giving critique, and being a great friend and roommate
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+- [Prof. Adam Doupe](https://adamdoupe.com/), for inspiration
