@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/rail-decoder/precache-manifest.59d28834c1126796769500ed38263cbd.js"
+  "/rail-decoder/precache-manifest.dc3028a537718bbd40b8a4e7fd14f661.js"
 );
 
 self.addEventListener('message', (event) => {
