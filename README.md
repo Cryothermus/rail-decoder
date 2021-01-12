@@ -18,7 +18,7 @@ You can access it at http://Cryothermus.github.io/rail-decoder.
 
 It's a bit convoluted to explain here, so here's a [Wikipedia article](https://en.wikipedia.org/wiki/Rail_fence_cipher).
 
-Basically, it re-arranged the characters so they zig-zag across a set of rails, and then reads the rails in order. The "ordered key" functionality here alos re-arranges these rails for more effective obfuscation.
+Basically, it re-arranged the characters so they zig-zag across a set of rails, and then reads the rails in order. The "ordered key" functionality here also re-arranges these rails for more effective obfuscation.
 
 - **Why did you make this? It's a bit niche...**
 
